@@ -2,6 +2,7 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/main.css">
+  <script src="scripts/script.js"></script>
   <title>Главная страница</title>
 </head>
 <body>
@@ -12,20 +13,20 @@
     </div>
     <!-- Заголовок -->
     <div class="content">
-        <h3 class="bigHeader">Invoces</h3>
+        <h3 class="bigHeader">Invoices</h3>
     </div>
     <!--Поле с кнопками-->
     <div class="content">
         <div> 
         <h4>Actions</h4>
-        <button>Add new</button>
+        <button onclick="addInvoice()">Add new</button>
       </div>
     </div>
     <!--Поле с таблицей-->
     <div class="content">
         <div>
-          <h4>Invoces</h4>
-          <table>
+          <h4>Invoices</h4>
+          <table id='invoicesTable'>
               <tr>
                 <th>Create</th>
                 <th>No</th>
