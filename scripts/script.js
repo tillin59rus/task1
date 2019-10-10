@@ -26,11 +26,18 @@ function addInvoice() {
 
                 var editButton = document.createElement('button');
                 editButton.innerHTML = 'Edit';
+                editButton.onclick = function() {
+                    location.href="edit-form.html"
+                }
                 column.appendChild(editButton);
                 
                 var deleteButton = document.createElement('button');
                 deleteButton.innerHTML = 'Delete';
                 deleteButton.id = 'deleteButton-' + counter;
+                
+                deleteButton.onclick = function() {
+                    invoice.parentNode.removeChild(invoice);
+                };
                 column.appendChild(deleteButton);
                 
                 //column.innerHTML = '<button>Edit</button> <button>Delete</button>';
@@ -43,3 +50,10 @@ function addInvoice() {
     table.appendChild(invoice);
 }
     
+
+
+function remove() {
+    var element = document.getElementById('block-1');
+    element.removeChild(document.querySelector('.link'))
+    element.removeChild(document.querySelector('.br-near-link'))
+}
