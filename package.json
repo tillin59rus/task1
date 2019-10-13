@@ -1,0 +1,23 @@
+{
+  "name": "Task_1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichailEshmakov/Task_1._Creation_of_web_applications_based_on_REST_API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MichailEshmakov/Task_1._Creation_of_web_applications_based_on_REST_API/issues"
+  },
+  "homepage": "https://github.com/MichailEshmakov/Task_1._Creation_of_web_applications_based_on_REST_API#readme",
+  "dependencies": {
+    "moment": "^2.24.0"
+  }
+}

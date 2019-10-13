@@ -49,11 +49,22 @@ function addInvoice() {
     }
     table.appendChild(invoice);
 }
-    
-
 
 function remove() {
     var element = document.getElementById('block-1');
     element.removeChild(document.querySelector('.link'))
     element.removeChild(document.querySelector('.br-near-link'))
 }
+
+
+let getInvoices = async () => {
+    let response = await fetch('http://localhost:3000/invoices')
+    if(response.ok) {
+        let data = await response.json();
+        console.log(data);
+    }
+    else {
+        console.error('Error: ${response.status}');
+    }
+}
+window.onload = getInvoices();
