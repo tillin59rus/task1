@@ -135,6 +135,12 @@ body {
   display: block;
 }
 
+.content #comment-input {
+  width:100%;
+  height:inherit;
+  box-sizing:border-box;
+}
+
 /*================Низ=============================*/
 #footer {
 	margin: -40px auto 0;

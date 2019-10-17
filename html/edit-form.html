@@ -25,21 +25,21 @@
                             <div>
                                 <label for="number">Number</label>
                                 <br>
-                                <input type="text" name="number" required>
+                                <input type="number" name="number" pattern="[0-9]" required >
                             </div>
                         </td>
                         <td>
                             <div>
                                 <label for="invoceDate">Invoce date</label>
                                 <br>
-                                <input type="text" name="invoceDate" required>
+                                <input type="date" name="invoceDate" required>
                             </div>
                         </td>
                         <td>
                             <div>
                                 <label for="supplyDate">Supply date</label>
                                 <br>
-                                <input type="text" name="supplyDate" required>
+                                <input type="date" name="supplyDate" required>
                             </div>
                         </td>
                     </tr>
@@ -48,7 +48,7 @@
                             <div>
                                 <label for="comment">Comment</label>
                                 <br>
-                                <input type="text" name="comment" required>
+                                <input id='comment-input' type="text" name="comment" required>
                             </div>
                         </td>
                     </tr>
