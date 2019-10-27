@@ -79,11 +79,11 @@ body {
 .content div {
   padding: 25px 10px 10px 10px;
 }
-.content form {
+.content .edit-form {
   padding: 25px 10px 10px 10px;
 }
 
-.content form table tr td input{
+.content .edit-form table tr td input{
   align-self: center;
 }
 .content li{
@@ -117,15 +117,15 @@ body {
   padding: 5px;
 }
 
-.content form table {
+.content .edit-form table {
   border-collapse: collapse; /*убираем пустые промежутки между ячейками*/
   border: 0px;
   width: 100%
 }
-.content form td, th {
+.content .edit-form td, th {
     border: 0px; 
 }
- .content form FIeldset {
+ .content .edit-form FIeldset {
   border-color: #37227C;
   padding-bottom: 5px;
   margin-bottom: 5px;

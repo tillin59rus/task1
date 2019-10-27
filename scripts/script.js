@@ -25,9 +25,9 @@ let addInvoice = async () =>  {
 }
 
 function remove() {
-    var element = document.getElementById('block-1');
-    element.removeChild(document.querySelector('.link'))
-    element.removeChild(document.querySelector('.br-near-link'))
+  var element = document.getElementById('block-1');
+  element.removeChild(document.querySelector('.link'))
+  element.removeChild(document.querySelector('.br-near-link'))
 }
 
 
