@@ -79,7 +79,6 @@ function addInvoiceInTable(invoice) {
           fetch('http://localhost:3000/invoices/' + invoice.id, {
             method: 'DELETE'
           }).catch(error => console.error(error.status));
-          debugger;
           table.removeChild(document.getElementById('row-' + invoice.id));
         };
 

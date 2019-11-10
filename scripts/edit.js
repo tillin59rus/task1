@@ -19,7 +19,6 @@ function save() {
     direction: null,
   }
 
-  debugger;
   fetch('http://localhost:3000/invoices/' + id, {
     method: 'PUT',
     headers: {
@@ -30,5 +29,23 @@ function save() {
     location.href="index.html";
   }, (error) => {
     console.error(error.status);
+  });
+}
+
+window.onload = function FillIn() {
+  const query = new URLSearchParams(window.location.search);
+  const id = query.get('invoice-id');
+  fetch('http://localhost:3000/invoices/' + id, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+  }).then(response => {
+    response.json().then(invoice => {
+      this.document.getElementById('comment').value = invoice.comment;
+      this.document.getElementById('number').value = invoice.number;
+      this.document.getElementById('invoceDate').value = moment(invoice.date_due, 'DD MMMM YYYY').format('YYYY-MM-DD');
+      this.document.getElementById('supplyDate').value = moment(invoice.date_supply, 'DD MMMM YYYY').format('YYYY-MM-DD');
+    });
   });
 }
