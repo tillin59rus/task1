@@ -24,11 +24,6 @@ let addInvoice = async () =>  {
   }
 }
 
-function remove() {
-  var element = document.getElementById('block-1');
-  element.removeChild(document.querySelector('.link'))
-  element.removeChild(document.querySelector('.br-near-link'))
-}
 
 
 let getInvoices = async () => {
@@ -62,16 +57,21 @@ let getInvoices = async () => {
             var editButton = document.createElement('button');
             editButton.innerHTML = 'Edit';
             editButton.onclick = function() {
-                location.href='edit-form.html?invoice-id=' + invoice.id;
+              location.href='edit-form.html?invoice-id=' + invoice.id;
             }
             cell.appendChild(editButton);
             
             var deleteButton = document.createElement('button');
             deleteButton.innerHTML = 'Delete';
             
-            deleteButton.onclick = function() {
-                cell.parentNode.removeChild(cell);
+            deleteButton.onclick = function deleteInvoice() {
+              fetch('http://localhost:3000/invoices/' + invoice.id, {
+                method: 'DELETE'
+              }).catch(error => console.error(error.status));
+              debugger;
+              table.removeChild(document.getElementById('row-' + invoice.id));
             };
+
             cell.appendChild(deleteButton);
             break;
           default:
