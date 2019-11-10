@@ -1,10 +1,10 @@
 function save() {
 
-  const number = document.getElementById('number').value;
-  const invoceDate = document.getElementById('invoceDate').value;
-  const supplyDate = document.getElementById('supplyDate').value;
+  const number = Number(document.getElementById('number').value);
+  const invoceDate = moment(document.getElementById('invoceDate').value).format('DD MMMM YYYY');
+  const supplyDate = moment(document.getElementById('supplyDate').value).format('DD MMMM YYYY');
   const comment = document.getElementById('comment').value;
-  const date_created = new Date() 
+  const date_created = moment().format('DD MMMM YYYY');
 
   const query = new URLSearchParams(window.location.search);
   const id = query.get('invoice-id');
