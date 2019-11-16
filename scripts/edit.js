@@ -38,7 +38,8 @@ window.onload = function FillIn() {
   fetch('http://localhost:3000/invoices/' + id, {
     method: 'GET',
     headers: {
-        'Content-Type': 'application/json;charset=utf-8'
+        'Content-Type': 'application/json;charset=utf-8',
+        'Accept': 'application/json'
       },
   }).then(response => {
     response.json().then(invoice => {
