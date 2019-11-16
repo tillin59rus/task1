@@ -1,12 +1,19 @@
 var counter = 0;
 
 let addInvoice = async () =>  {
+
+  const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+
   const newInvoice = {
+    id: uuid,
     comment: null,
     date_created: null,
     date_due: null,
     date_supply: null,
-    direction: null,//Сделай guid
+    direction: null
   }
   let response = await fetch('http://localhost:3000/invoices', {
     method: 'POST',
@@ -15,7 +22,6 @@ let addInvoice = async () =>  {
     },
     body: JSON.stringify(newInvoice)
   });
-
   if(response.ok) {
     addInvoiceInTable(newInvoice);
   }
