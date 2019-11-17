@@ -24,7 +24,17 @@ let addInvoice = async () =>  {
     body: JSON.stringify(newInvoice)
   });
   if(response.ok) {
-    addInvoiceInTable(newInvoice);
+    const table = document.getElementById("invoicesTable");
+
+    const isShowColumns = {
+      number: document.getElementById("number-checkbox").checked,
+      comment: document.getElementById("comment-checkbox").checked,
+      date_created: document.getElementById("date-created-checkbox").checked,
+      date_due: document.getElementById("date-due-checkbox").checked,
+      date_supply: document.getElementById("date-supply-checkbox").checked
+    };
+
+    addInvoiceInTable(newInvoice, table, isShowColumns);
   }
   else {
     console.error('Error: ${response.status}');
@@ -37,10 +47,18 @@ let getInvoices = async () => {
   let response = await fetch('http://localhost:3000/invoices');
   if(response.ok) {
     let data = await response.json();
-    console.log(data);
-    
+    const table = document.getElementById("invoicesTable");
+
+    const isShowColumns = {
+      number: document.getElementById("number-checkbox").checked,
+      comment: document.getElementById("comment-checkbox").checked,
+      date_created: document.getElementById("date-created-checkbox").checked,
+      date_due: document.getElementById("date-due-checkbox").checked,
+      date_supply: document.getElementById("date-supply-checkbox").checked
+    };
+
     data.forEach(invoice => {
-      addInvoiceInTable(invoice);
+      addInvoiceInTable(invoice, table, isShowColumns);
     });
   }
   else {
@@ -49,37 +67,60 @@ let getInvoices = async () => {
 }
 window.onload = getInvoices();
 
-function addInvoiceInTable(invoice) {
-  let table = document.getElementById("invoicesTable");
-  var invoiceRow = document.createElement('tr');
+function addInvoiceInTable(invoice, table, isShowColumns)  {
+
+  
+  
+  const invoiceRow = document.createElement('tr');
   invoiceRow.className = 'invoice';
   invoiceRow.id = 'row-' + invoice.id;
-  for(let i = 0; i < 5; i += 1) {
+
+  
+
+  for(let i = 0; i < 6; i += 1) {
     let cell = document.createElement('td');
     switch(i) {
       case 0:
-        cell.innerHTML = invoice.date_created;
+        if (isShowColumns.date_created) {
+          cell.innerHTML = invoice.date_created;
+          invoiceRow.appendChild(cell);
+        }
         break;
       case 1:
-        cell.innerHTML = invoice.number;
+        if (isShowColumns.number) {
+          cell.innerHTML = invoice.number;
+          invoiceRow.appendChild(cell);
+        }
         break;
       case 2:
-        cell.innerHTML = invoice.date_supply;
+        if (isShowColumns.date_supply) {
+          cell.innerHTML = invoice.date_supply;
+          invoiceRow.appendChild(cell);
+        }
         break;
       case 3:
-        cell.innerHTML = invoice.comment;
+        if (isShowColumns.date_due) {
+          cell.innerHTML = invoice.date_due;
+          invoiceRow.appendChild(cell);
+        }
         break;
       case 4:
+        if (isShowColumns.comment) {
+          cell.innerHTML = invoice.comment;
+          invoiceRow.appendChild(cell);
+        }
+        break;
+      case 5:
         cell.className = "buttonColumn";
 
-        var editButton = document.createElement('button');
+        const editButton = document.createElement('button');
         editButton.innerHTML = 'Edit';
         editButton.onclick = function() {
           location.href='edit-form.html?invoice-id=' + invoice.id;
         }
         cell.appendChild(editButton);
         
-        var deleteButton = document.createElement('button');
+        const deleteButton = document.createElement('button');
         deleteButton.innerHTML = 'Delete';
         
         deleteButton.onclick = function deleteInvoice() {
@@ -90,11 +131,11 @@ function addInvoiceInTable(invoice) {
         };
 
         cell.appendChild(deleteButton);
+        invoiceRow.appendChild(cell);
         break;
       default:
         break;
     }
-    invoiceRow.appendChild(cell);
   }
   table.appendChild(invoiceRow);
 }
