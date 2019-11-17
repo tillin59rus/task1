@@ -23,20 +23,9 @@ let addInvoice = async () =>  {
     },
     body: JSON.stringify(newInvoice)
   });
-  if(response.ok) {
-    const table = document.getElementById("invoicesTable");
-
-    const isShowColumns = {
-      number: document.getElementById("number-checkbox").checked,
-      comment: document.getElementById("comment-checkbox").checked,
-      date_created: document.getElementById("date-created-checkbox").checked,
-      date_due: document.getElementById("date-due-checkbox").checked,
-      date_supply: document.getElementById("date-supply-checkbox").checked
-    };
-
-    addInvoiceInTable(newInvoice, table, isShowColumns);
-  }
-  else {
+  if (response.ok) {
+    addInvoicesInTable([newInvoice]);
+  } else {
     console.error('Error: ${response.status}');
   }
 }
@@ -46,36 +35,33 @@ let addInvoice = async () =>  {
 let getInvoices = async () => {
   let response = await fetch('http://localhost:3000/invoices');
   if(response.ok) {
-    let data = await response.json();
-    const table = document.getElementById("invoicesTable");
-
-    const isShowColumns = {
-      number: document.getElementById("number-checkbox").checked,
-      comment: document.getElementById("comment-checkbox").checked,
-      date_created: document.getElementById("date-created-checkbox").checked,
-      date_due: document.getElementById("date-due-checkbox").checked,
-      date_supply: document.getElementById("date-supply-checkbox").checked
-    };
-
-    data.forEach(invoice => {
-      addInvoiceInTable(invoice, table, isShowColumns);
-    });
-  }
-  else {
-      console.error('Error: ${response.status}');
+    const data = await response.json();
+    return data;
+  } else {
+    console.error('Error: ${response.status}');
   }
 }
-window.onload = getInvoices();
+
+function addInvoicesInTable(invoices) {
+  const table = document.getElementById("invoicesTable");
+
+  const isShowColumns = {
+    number: document.getElementById("number-checkbox").checked,
+    comment: document.getElementById("comment-checkbox").checked,
+    date_created: document.getElementById("date-created-checkbox").checked,
+    date_due: document.getElementById("date-due-checkbox").checked,
+    date_supply: document.getElementById("date-supply-checkbox").checked
+  };
+  invoices.forEach(invoice => {
+    addInvoiceInTable(invoice, table, isShowColumns);
+  });
+}
 
 function addInvoiceInTable(invoice, table, isShowColumns)  {
 
-  
-  
   const invoiceRow = document.createElement('tr');
   invoiceRow.className = 'invoice';
   invoiceRow.id = 'row-' + invoice.id;
-
-  
 
   for(let i = 0; i < 6; i += 1) {
     let cell = document.createElement('td');
@@ -119,7 +105,7 @@ function addInvoiceInTable(invoice, table, isShowColumns)  {
           location.href='edit-form.html?invoice-id=' + invoice.id;
         }
         cell.appendChild(editButton);
-        
+
         const deleteButton = document.createElement('button');
         deleteButton.innerHTML = 'Delete';
         
@@ -137,5 +123,12 @@ function addInvoiceInTable(invoice, table, isShowColumns)  {
         break;
     }
   }
+
   table.appendChild(invoiceRow);
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  getInvoices().then(invoices => {
+    addInvoicesInTable(invoices);
+  });
+}, false);
