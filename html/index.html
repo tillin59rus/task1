@@ -13,14 +13,70 @@
     </div>
     <!-- Заголовок -->
     <div class="content">
-        <h3 class="bigHeader">Invoices</h3>
+      <h3 class="bigHeader">Invoices</h3>
     </div>
     <!--Поле с кнопками-->
     <div class="content">
-        <div> 
+      <div> 
         <h4>Actions</h4>
         <button onclick="addInvoice()">Add new</button>
       </div>
+    </div>
+    <!--Поле для фильтрации-->
+    <div class="content">
+      <table id="filter-table">
+        <tr>
+          <td>Search:</td>
+          <td><input type="text"></td>
+          <td>Filter by:</td>
+          <td>
+            <table>
+              <tr>
+                <td>
+                  <label for="number-checkbox">Number</label>
+                  <input type="checkbox" id="number-checkbox" checked></td>
+                <td>
+                  <label for="date-created-checkbox">Date created</label>
+                  <input type="checkbox" id="date-created-checkbox" checked>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="comment-checkbox">Comment</label>
+                  <input type="checkbox" id="comment-checkbox" checked>
+                </td>
+                <td>
+                  <label for="date-due-checkbox">Date due</label>
+                  <input type="checkbox" id="date-due-checkbox" checked>
+                </td>
+              </tr>
+              <tr>
+                <td>
+
+                </td>
+                <td>
+                  <label for="date-supply-checkbox">Date supply</label>
+                  <input type="checkbox" id="date-supply-checkbox" checked>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td>Order by:</td>
+          <td>
+            <select sorting>
+              <option sorting>Пункт 1</option>
+              <option sorting>Пункт 2</option> 
+            </select>
+            <select by>
+              <option by>desc</option>
+              <option by>asc</option> 
+            </select>
+          </td>
+          <td>
+            <button>Go</button>
+          </td>
+        </tr>
+      </table>
     </div>
     <!--Поле с таблицей-->
     <div class="content">
