@@ -17,79 +17,67 @@
     </div>
     <!--Поле с кнопками-->
     <div class="content">
-      <div> 
+      <div>
         <h4>Actions</h4>
         <button onclick="addInvoice()">Add new</button>
       </div>
     </div>
     <!--Поле для фильтрации-->
     <div class="content">
-      <table id="filter-table">
-        <tr>
-          <td>Search:</td>
-          <td><input type="text"></td>
-          <td>Filter by:</td>
-          <td>
-            <table>
-              <tr>
-                <td>
-                  <label for="date-created-checkbox">Date created</label>
-                  <input type="checkbox" id="date-created-checkbox" checked>
-                </td>
-                <td>
-                  <label for="number-checkbox">Number</label>
-                  <input type="checkbox" id="number-checkbox" checked></td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="date-due-checkbox">Date due</label>
-                  <input type="checkbox" id="date-due-checkbox" checked>
-                </td>
-                <td>
-                  <label for="comment-checkbox">Comment</label>
-                  <input type="checkbox" id="comment-checkbox" checked>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="date-supply-checkbox">Date supply</label>
-                  <input type="checkbox" id="date-supply-checkbox">
-                </td>
-                <td>
+      <div class="filter-field">
+        <table id="filter-table">
+          <tr>
+            <td>
+              <label for="search-input">Search:</label>
+              <input type="text" id="search-input">
+            </td>
+            <td>
+              <label for="property-sorting">Order by:</label>
+              <select id="property-sorting" sorting>
+                <option sorting>Пункт 1</option>
+                <option sorting>Пункт 2</option>
+              </select>
+              <select by>
+                <option by>desc</option>
+                <option by>asc</option>
+              </select>
+            </td>
+            <td>Filter by:</td>
+            <td colspan="2">
+              <label for="date-created-checkbox">Date created</label>
+              <input type="checkbox" id="date-created-checkbox" checked>
 
-                </td>
-              </tr>
-            </table>
-          </td>
-          <td>Order by:</td>
-          <td>
-            <select sorting>
-              <option sorting>Пункт 1</option>
-              <option sorting>Пункт 2</option> 
-            </select>
-            <select by>
-              <option by>desc</option>
-              <option by>asc</option> 
-            </select>
-          </td>
-          <td>
-            <button>Go</button>
-          </td>
-        </tr>
-      </table>
+              <label for="number-checkbox">Number</label>
+              <input type="checkbox" id="number-checkbox" checked>
+
+              <label for="date-due-checkbox">Date due</label>
+              <input type="checkbox" id="date-due-checkbox" checked>
+
+              <label for="comment-checkbox">Comment</label>
+              <input type="checkbox" id="comment-checkbox" checked>
+
+              <label for="date-supply-checkbox">Date supply</label>
+              <input type="checkbox" id="date-supply-checkbox">
+            </td>
+            <td>
+                <button>Go</button>
+              </td>
+          </tr>
+        </table>
+      </div>
     </div>
     <!--Поле с таблицей-->
     <div class="content">
-        <div>
-          <h4>Invoices</h4>
-          <table id='invoicesTable'>
-          </table>
+      <div>
+        <h4>Invoices</h4>
+        <table id='invoicesTable'>
+        </table>
       </div>
     </div>
   </div>
   <!-- Сделаем низ -->
   <div id="footer">
-  <p>Задание 1. Создание веб-приложения на основе REST API</p>
+    <p>Задание 1. Создание веб-приложения на основе REST API</p>
   </div>
 </body>
 </html>

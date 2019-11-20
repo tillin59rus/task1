@@ -141,6 +141,15 @@ body {
   box-sizing:border-box;
 }
 
+.content .filter-field table {
+  border-collapse: collapse; /*убираем пустые промежутки между ячейками*/
+  border: 0px;
+  width: 100%
+}
+.content .filter-field td, th {
+    border: 0px; 
+}
+
 /*================Низ=============================*/
 #footer {
 	margin: -40px auto 0;
