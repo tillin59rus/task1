@@ -33,16 +33,19 @@
             </td>
             <td>
               <label for="property-sorting">Order by:</label>
-              <select id="property-sorting" sorting>
-                <option sorting>Пункт 1</option>
-                <option sorting>Пункт 2</option>
+              <select id="property-sorting" name="sorting" sorting>
+                <option sorting value="date_created">Date created</option>
+                <option sorting value="number">Number</option>
+                <option sorting value="date_due">Date due</option>
+                <option sorting value="comment">Comment</option>
+                <option sorting value="date_supply">Date supply</option>
               </select>
               <select by>
                 <option by>desc</option>
                 <option by>asc</option>
               </select>
             </td>
-            <td>Filter by:</td>
+            <td>Select by:</td>
             <td colspan="2">
               <label for="date-created-checkbox">Date created</label>
               <input type="checkbox" id="date-created-checkbox" checked>
@@ -60,7 +63,7 @@
               <input type="checkbox" id="date-supply-checkbox">
             </td>
             <td>
-                <button>Go</button>
+                <button onclick="refreshTable()">Go</button>
               </td>
           </tr>
         </table>

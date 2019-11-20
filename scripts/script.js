@@ -33,7 +33,14 @@ let addInvoice = async () =>  {
 
 
 let getInvoices = async () => {
-  let response = await fetch('http://localhost:3000/invoices');
+  let sortingValue = '';
+  const sorting = document.getElementById("property-sorting")
+  n = sorting.selectedIndex
+  if(n) {
+    sortingValue = '?_sort=' + sorting.options[n].value
+  }
+
+  let response = await fetch('http://localhost:3000/invoices' + sortingValue);
   if(response.ok) {
     const data = await response.json();
     return data;
@@ -125,6 +132,16 @@ function addInvoiceInTable(invoice, table, isShowColumns)  {
   }
 
   table.appendChild(invoiceRow);
+}
+
+function refreshTable() {
+  const table = document.getElementById("invoicesTable");
+  table.innerHTML = "";
+  getInvoices().then(invoices => {
+    addInvoicesInTable(invoices);
+  });
+
+  document.getElementById(elementID).innerHTML = "";
 }
 
 document.addEventListener('DOMContentLoaded', function() {
