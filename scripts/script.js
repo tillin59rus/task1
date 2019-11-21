@@ -34,10 +34,15 @@ let addInvoice = async () =>  {
 
 let getInvoices = async () => {
   let sortingValue = '';
-  const sorting = document.getElementById("property-sorting")
-  n = sorting.selectedIndex
-  if(n) {
-    sortingValue = '?_sort=' + sorting.options[n].value
+  const sorting = document.getElementById("property-sorting");
+  const sortingDirection = document.getElementById('property-sorting-direction');
+  const sortingIndex = sorting.selectedIndex;
+  const sortingDirectionIndex = sortingDirection.selectedIndex
+
+  if(sortingDirectionIndex && sortingDirection.options[sortingDirectionIndex].value != 'NONE') {
+    if(sortingIndex) {
+      sortingValue = '?_sort=' + sorting.options[sortingIndex].value + '&_order=' + sortingDirection.options[sortingDirectionIndex].value;
+    }
   }
 
   let response = await fetch('http://localhost:3000/invoices' + sortingValue);
