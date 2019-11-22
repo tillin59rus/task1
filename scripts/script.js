@@ -30,18 +30,20 @@ let addInvoice = async () =>  {
   }
 }
 
-
-
 let getInvoices = async () => {
   let sortingValue = '';
   const sorting = document.getElementById("property-sorting");
   const sortingDirection = document.getElementById('property-sorting-direction');
   const sortingIndex = sorting.selectedIndex;
-  const sortingDirectionIndex = sortingDirection.selectedIndex
-
-  if(sortingDirectionIndex && sortingDirection.options[sortingDirectionIndex].value != 'NONE') {
-    if(sortingIndex) {
+  const sortingDirectionIndex = sortingDirection.selectedIndex;
+  console.log('sortingIndex = ' + sortingIndex);
+  console.log('sortingDirectionIndex = ' + sortingDirectionIndex);
+// console.log('?_sort=' + sorting.options[sortingIndex].value + '&_order=' + sortingDirection.options[sortingDirectionIndex].value)
+  if(sortingDirectionIndex != null && sortingDirection.options[sortingDirectionIndex].value != 'NONE') {
+    if(sortingIndex != null) {
+      
       sortingValue = '?_sort=' + sorting.options[sortingIndex].value + '&_order=' + sortingDirection.options[sortingDirectionIndex].value;
+      console.log('sortingValue = ' + sortingValue);
     }
   }
 
@@ -80,7 +82,7 @@ function addInvoiceInTable(invoice, table, isShowColumns)  {
     switch(i) {
       case 0:
         if (isShowColumns.date_created) {
-          cell.innerHTML = invoice.date_created;
+          cell.innerHTML = moment(invoice.date_created).format('DD MMMM YYYY');
           invoiceRow.appendChild(cell);
         }
         break;
@@ -92,13 +94,13 @@ function addInvoiceInTable(invoice, table, isShowColumns)  {
         break;
       case 2:
         if (isShowColumns.date_supply) {
-          cell.innerHTML = invoice.date_supply;
+          cell.innerHTML = moment(invoice.date_supply).format('DD MMMM YYYY');
           invoiceRow.appendChild(cell);
         }
         break;
       case 3:
         if (isShowColumns.date_due) {
-          cell.innerHTML = invoice.date_due;
+          cell.innerHTML = moment(invoice.date_due).format('DD MMMM YYYY');
           invoiceRow.appendChild(cell);
         }
         break;
@@ -145,8 +147,6 @@ function refreshTable() {
   getInvoices().then(invoices => {
     addInvoicesInTable(invoices);
   });
-
-  document.getElementById(elementID).innerHTML = "";
 }
 
 document.addEventListener('DOMContentLoaded', function() {

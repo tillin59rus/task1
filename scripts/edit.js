@@ -1,10 +1,10 @@
 function save() {
 
   const number = Number(document.getElementById('number').value);
-  const invoceDate = moment(document.getElementById('invoceDate').value).format('DD MMMM YYYY');
-  const supplyDate = moment(document.getElementById('supplyDate').value).format('DD MMMM YYYY');
+  const invoceDate = document.getElementById('invoceDate').value;
+  const supplyDate = document.getElementById('supplyDate').value;
   const comment = document.getElementById('comment').value;
-  const date_created = moment().format('DD MMMM YYYY');
+  const date_created = new Date();
 
   const query = new URLSearchParams(window.location.search);
   const id = query.get('invoice-id');
@@ -45,8 +45,8 @@ window.onload = function FillIn() {
     response.json().then(invoice => {
       this.document.getElementById('comment').value = invoice.comment;
       this.document.getElementById('number').value = invoice.number;
-      this.document.getElementById('invoceDate').value = moment(invoice.date_due, 'DD MMMM YYYY').format('YYYY-MM-DD');
-      this.document.getElementById('supplyDate').value = moment(invoice.date_supply, 'DD MMMM YYYY').format('YYYY-MM-DD');
+      this.document.getElementById('invoceDate').value = moment(invoice.date_due).format('YYYY-MM-DD');
+      this.document.getElementById('supplyDate').value = moment(invoice.date_supply).format('YYYY-MM-DD');
     });
   });
 }
