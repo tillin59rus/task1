@@ -1,9 +1,11 @@
 var counter = 0;
 
-let addInvoice = async () =>  {
-
-  const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+let addInvoice = async () => {
+  const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(
+    c
+  ) {
+    var r = (Math.random() * 16) | 0,
+      v = c == 'x' ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
 
@@ -14,7 +16,7 @@ let addInvoice = async () =>  {
     date_due: null,
     date_supply: null,
     direction: null
-  }
+  };
   let response = await fetch('http://localhost:3000/invoices', {
     method: 'POST',
     headers: {
@@ -28,58 +30,77 @@ let addInvoice = async () =>  {
   } else {
     console.error('Error: ${response.status}');
   }
-}
+};
 
 let getInvoices = async () => {
-  let sortingValue = '';
-  const sorting = document.getElementById("property-sorting");
-  const sortingDirection = document.getElementById('property-sorting-direction');
+
+  //Сортировка
+  let sortingValue = null;
+  const sorting = document.getElementById('property-sorting');
+  const sortingDirection = document.getElementById(
+    'property-sorting-direction'
+  );
   const sortingIndex = sorting.selectedIndex;
   const sortingDirectionIndex = sortingDirection.selectedIndex;
-  console.log('sortingIndex = ' + sortingIndex);
-  console.log('sortingDirectionIndex = ' + sortingDirectionIndex);
-// console.log('?_sort=' + sorting.options[sortingIndex].value + '&_order=' + sortingDirection.options[sortingDirectionIndex].value)
-  if(sortingDirectionIndex != null && sortingDirection.options[sortingDirectionIndex].value != 'NONE') {
-    if(sortingIndex != null) {
-      
-      sortingValue = '?_sort=' + sorting.options[sortingIndex].value + '&_order=' + sortingDirection.options[sortingDirectionIndex].value;
-      console.log('sortingValue = ' + sortingValue);
-    }
+
+  if (
+    sortingDirectionIndex != null
+    && sortingDirection.options[sortingDirectionIndex].value != 'NONE'
+    && sortingIndex != null ) {
+      sortingValue = '_sort=' 
+        + sorting.options[sortingIndex].value 
+        + '&_order=' 
+        + sortingDirection.options[sortingDirectionIndex].value;
   }
 
-  let response = await fetch('http://localhost:3000/invoices' + sortingValue);
-  if(response.ok) {
+  //Полнотекстовый поиск
+  let searchingValue = null;
+  const searching = document.getElementById('search-input');
+  if(searching.value != '') {
+    searchingValue = 'q=' + searching.value;
+  }
+
+  questionMark = (sortingValue || searchingValue) ? '?' : '';
+
+  const filterString = questionMark 
+  + (sortingValue ? sortingValue : '')
+  + (searchingValue ? ('&' + searchingValue) : '');
+
+  console.log(filterString)
+
+  let response = await fetch('http://localhost:3000/invoices' + filterString)
+
+  if (response.ok) {
     const data = await response.json();
     return data;
   } else {
     console.error('Error: ${response.status}');
   }
-}
+};
 
 function addInvoicesInTable(invoices) {
-  const table = document.getElementById("invoicesTable");
+  const table = document.getElementById('invoicesTable');
 
   const isShowColumns = {
-    number: document.getElementById("number-checkbox").checked,
-    comment: document.getElementById("comment-checkbox").checked,
-    date_created: document.getElementById("date-created-checkbox").checked,
-    date_due: document.getElementById("date-due-checkbox").checked,
-    date_supply: document.getElementById("date-supply-checkbox").checked
+    number: document.getElementById('number-checkbox').checked,
+    comment: document.getElementById('comment-checkbox').checked,
+    date_created: document.getElementById('date-created-checkbox').checked,
+    date_due: document.getElementById('date-due-checkbox').checked,
+    date_supply: document.getElementById('date-supply-checkbox').checked
   };
   invoices.forEach(invoice => {
     addInvoiceInTable(invoice, table, isShowColumns);
   });
 }
 
-function addInvoiceInTable(invoice, table, isShowColumns)  {
-
+function addInvoiceInTable(invoice, table, isShowColumns) {
   const invoiceRow = document.createElement('tr');
   invoiceRow.className = 'invoice';
   invoiceRow.id = 'row-' + invoice.id;
 
-  for(let i = 0; i < 6; i += 1) {
+  for (let i = 0; i < 6; i += 1) {
     let cell = document.createElement('td');
-    switch(i) {
+    switch (i) {
       case 0:
         if (isShowColumns.date_created) {
           cell.innerHTML = moment(invoice.date_created).format('DD MMMM YYYY');
@@ -111,18 +132,18 @@ function addInvoiceInTable(invoice, table, isShowColumns)  {
         }
         break;
       case 5:
-        cell.className = "buttonColumn";
+        cell.className = 'buttonColumn';
 
         const editButton = document.createElement('button');
         editButton.innerHTML = 'Edit';
         editButton.onclick = function() {
-          location.href='edit-form.html?invoice-id=' + invoice.id;
-        }
+          location.href = 'edit-form.html?invoice-id=' + invoice.id;
+        };
         cell.appendChild(editButton);
 
         const deleteButton = document.createElement('button');
         deleteButton.innerHTML = 'Delete';
-        
+
         deleteButton.onclick = function deleteInvoice() {
           fetch('http://localhost:3000/invoices/' + invoice.id, {
             method: 'DELETE'
@@ -142,15 +163,19 @@ function addInvoiceInTable(invoice, table, isShowColumns)  {
 }
 
 function refreshTable() {
-  const table = document.getElementById("invoicesTable");
-  table.innerHTML = "";
+  const table = document.getElementById('invoicesTable');
+  table.innerHTML = '';
   getInvoices().then(invoices => {
     addInvoicesInTable(invoices);
   });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  getInvoices().then(invoices => {
-    addInvoicesInTable(invoices);
-  });
-}, false);
+document.addEventListener(
+  'DOMContentLoaded',
+  function() {
+    getInvoices().then(invoices => {
+      addInvoicesInTable(invoices);
+    });
+  },
+  false
+);
