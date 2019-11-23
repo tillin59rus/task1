@@ -17,7 +17,7 @@ let addInvoice = async () => {
     date_supply: null,
     direction: null
   };
-  let response = await fetch('http://localhost:3000/invoices', {
+  let response = await fetch('https://tds-task-1-miesh.herokuapp.com/invoices', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -125,7 +125,7 @@ let getInvoices = async () => {
 
   console.log(filterString)
 
-  let response = await fetch('http://localhost:3000/invoices' + filterString)
+  let response = await fetch('https://tds-task-1-miesh.herokuapp.com/invoices' + filterString)
 
   if (response.ok) {
     const data = await response.json();
@@ -211,7 +211,7 @@ function addInvoiceInTable(invoice, table, isShowColumns) {
         deleteButton.innerHTML = 'Delete';
 
         deleteButton.onclick = function deleteInvoice() {
-          fetch('http://localhost:3000/invoices/' + invoice.id, {
+          fetch('https://tds-task-1-miesh.herokuapp.com/invoices/' + invoice.id, {
             method: 'DELETE'
           }).catch(error => console.error(error.status));
           table.removeChild(document.getElementById('row-' + invoice.id));

@@ -19,7 +19,7 @@ function save() {
     direction: null,
   }
 
-  fetch('http://localhost:3000/invoices/' + id, {
+  fetch('https://tds-task-1-miesh.herokuapp.com/invoices/' + id, {
     method: 'PUT',
     headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -35,7 +35,7 @@ function save() {
 window.onload = function FillIn() {
   const query = new URLSearchParams(window.location.search);
   const id = query.get('invoice-id');
-  fetch('http://localhost:3000/invoices/' + id, {
+  fetch('https://tds-task-1-miesh.herokuapp.com/invoices/' + id, {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json;charset=utf-8',
