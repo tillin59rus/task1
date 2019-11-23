@@ -26,7 +26,7 @@ let addInvoice = async () => {
     body: JSON.stringify(newInvoice)
   });
   if (response.ok) {
-    addInvoicesInTable([newInvoice]);
+    location.href = 'edit-form.html?invoice-id=' + uuid;
   } else {
     console.error('Error: ${response.status}');
   }
@@ -160,33 +160,42 @@ function addInvoiceInTable(invoice, table, isShowColumns) {
     switch (i) {
       case 0:
         if (isShowColumns.date_created) {
-          cell.innerHTML = moment(invoice.date_created).format('DD MMMM YYYY');
+          cell.innerHTML = checkDate(invoice.date_created);
           invoiceRow.appendChild(cell);
         }
+
         break;
       case 1:
         if (isShowColumns.number) {
-          cell.innerHTML = invoice.number;
+          if(invoice.number != undefined) {
+            cell.innerHTML = invoice.number;
+          } else {
+            cell.innerHTML = '';
+          }
+
           invoiceRow.appendChild(cell);
         }
         break;
       case 2:
         if (isShowColumns.date_supply) {
-          cell.innerHTML = moment(invoice.date_supply).format('DD MMMM YYYY');
+          cell.innerHTML = checkDate(invoice.date_supply);
           invoiceRow.appendChild(cell);
         }
+
         break;
       case 3:
         if (isShowColumns.date_due) {
-          cell.innerHTML = moment(invoice.date_due).format('DD MMMM YYYY');
+          cell.innerHTML = checkDate(invoice.date_due);
           invoiceRow.appendChild(cell);
         }
+
         break;
       case 4:
         if (isShowColumns.comment) {
           cell.innerHTML = invoice.comment;
           invoiceRow.appendChild(cell);
         }
+
         break;
       case 5:
         cell.className = 'buttonColumn';
@@ -236,3 +245,10 @@ document.addEventListener(
   },
   false
 );
+
+function checkDate(date) {
+  const showingDate = moment(date).format('DD MMMM YYYY');
+  if(!showingDate || showingDate == 'Invalid date') {
+    return ''
+  } else return showingDate;
+}
