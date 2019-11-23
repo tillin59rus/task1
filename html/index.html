@@ -29,11 +29,96 @@
         <table id="filter-table">
           <tr>
             <td>
-              <label for="search-input">Search:</label>
+              <label for="search-input" class="boldCell">Search:</label>
               <input type="text" id="search-input">
             </td>
+            <td rowspan="2" class="boldCell">Filter:</td>
+            <td rowspan="2">
+              <table>
+                <tr>
+                  <td>
+                    date created:
+                  </td>
+                  <td>
+                    <label for="from-date-created-input">from</label>
+                    <input type="date" id="from-date-created-input">
+                    <label for="to-date-created-input">to</label>
+                    <input type="date" id="to-date-created-input">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    date due: 
+                  </td>
+                  <td>
+                    <label for="from-date-due-input">from</label>
+                    <input type="date" id="from-date-due-input">
+                    <label for="to-date-due-input">to</label>
+                    <input type="date" id="to-date-due-input">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    date supply: 
+                  </td>
+                  <td>
+                    <label for="from-date-supply-input">from</label>
+                    <input type="date" id="from-date-supply-input">
+                    <label for="to-date-supply-input">to</label>
+                    <input type="date" id="to-date-supply-input">
+                  </td>
+                </tr>
+              </table>
+            </td> 
+            <td rowspan="2" class="boldCell">Show:</td>
+            <td rowspan="2">
+              <table>
+                <tr>
+                  <td>
+                    <label for="date-created-checkbox">Date created</label>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="date-created-checkbox" checked>
+                  </td>
+                  <td>
+                    <label for="number-checkbox">Number</label>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="number-checkbox" checked>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="date-due-checkbox">Date due</label>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="date-due-checkbox" checked>
+                  </td>
+                  <td>
+                    <label for="comment-checkbox">Comment</label>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="comment-checkbox" checked>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="date-supply-checkbox">Date supply</label>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="date-supply-checkbox">
+                  </td>
+                  <td></td>
+                </tr>
+              </table>
+            </td>
+            <td rowspan="2">
+              <button onclick="refreshTable()" class="boldCell">Go</button>
+            </td>
+          </tr>
+          <tr>
             <td>
-              <label for="property-sorting">Order by:</label>
+              <label for="property-sorting" class="boldCell">Order by:</label>
               <select id="property-sorting" name="sorting" sorting>
                 <option sorting value="date_created">Date created</option>
                 <option sorting value="number">Number</option>
@@ -47,26 +132,6 @@
                 <option by value="NONE">none</option>
               </select>
             </td>
-            <td>Show:</td>
-            <td colspan="2">
-              <label for="date-created-checkbox">Date created</label>
-              <input type="checkbox" id="date-created-checkbox" checked>
-
-              <label for="number-checkbox">Number</label>
-              <input type="checkbox" id="number-checkbox" checked>
-
-              <label for="date-due-checkbox">Date due</label>
-              <input type="checkbox" id="date-due-checkbox" checked>
-
-              <label for="comment-checkbox">Comment</label>
-              <input type="checkbox" id="comment-checkbox" checked>
-
-              <label for="date-supply-checkbox">Date supply</label>
-              <input type="checkbox" id="date-supply-checkbox">
-            </td>
-            <td>
-                <button onclick="refreshTable()">Go</button>
-              </td>
           </tr>
         </table>
       </div>

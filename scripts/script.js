@@ -36,11 +36,11 @@ let getInvoices = async () => {
 
   //Сортировка
   let sortingValue = null;
-  const sorting = document.getElementById('property-sorting');
+  const sortingInput = document.getElementById('property-sorting');
   const sortingDirection = document.getElementById(
     'property-sorting-direction'
   );
-  const sortingIndex = sorting.selectedIndex;
+  const sortingIndex = sortingInput.selectedIndex;
   const sortingDirectionIndex = sortingDirection.selectedIndex;
 
   if (
@@ -48,23 +48,80 @@ let getInvoices = async () => {
     && sortingDirection.options[sortingDirectionIndex].value != 'NONE'
     && sortingIndex != null ) {
       sortingValue = '_sort=' 
-        + sorting.options[sortingIndex].value 
+        + sortingInput.options[sortingIndex].value 
         + '&_order=' 
         + sortingDirection.options[sortingDirectionIndex].value;
   }
 
   //Полнотекстовый поиск
   let searchingValue = null;
-  const searching = document.getElementById('search-input');
-  if(searching.value != '') {
-    searchingValue = 'q=' + searching.value;
+  const searching = document.getElementById('search-input').value;
+  if(searching != '') {
+    searchingValue = 'q=' + searching;
   }
 
-  questionMark = (sortingValue || searchingValue) ? '?' : '';
+  //Фильтрация
+  let filteringValue = '';
+  const dateCreatedFrom = document.getElementById('from-date-created-input').value;
+  const dateCreatedTo = document.getElementById('to-date-created-input').value;
+  const dateDueFrom = document.getElementById('from-date-due-input').value;
+  const dateDueTo = document.getElementById('to-date-due-input').value;
+  const dateSupplyFrom = document.getElementById('from-date-supply-input').value;
+  const dateSupplyTo = document.getElementById('to-date-supply-input').value;
+  
+  if (dateCreatedFrom) {
+    filteringValue += 'date_created_gte=' + dateCreatedFrom;
+  }
 
+  if (dateCreatedTo) {
+    if (filteringValue != '') {
+      filteringValue += '&'
+    }
+
+    filteringValue += 'date_created_lte=' + dateCreatedTo;
+  }
+
+  if (dateDueFrom) {
+    if (filteringValue != '') {
+      filteringValue += '&'
+    }
+
+    filteringValue += 'date_due_gte=' + dateDueFrom;
+  }
+
+  if (dateDueTo) {
+    if (filteringValue != '') {
+      filteringValue += '&'
+    }
+
+    filteringValue += 'date_due_lte=' + dateDueTo;
+  }
+
+  if (dateSupplyFrom) {
+    if (filteringValue != '') {
+      filteringValue += '&'
+    }
+
+    filteringValue += 'date_supply_gte=' + dateSupplyFrom;
+  }
+
+  if (dateSupplyTo) {
+    if (filteringValue != '') {
+      filteringValue += '&'
+    }
+
+    filteringValue += 'date_supply_lte=' + dateSupplyTo;
+  }
+
+  //Запрос
+  const questionMark = (sortingValue 
+    || searchingValue 
+    || (filteringValue && filteringValue != '')) 
+    ? '?' : '';
   const filterString = questionMark 
   + (sortingValue ? sortingValue : '')
-  + (searchingValue ? ('&' + searchingValue) : '');
+  + (searchingValue ? ('&' + searchingValue) : '')
+  + (filteringValue ?  ('&' + filteringValue) : '');
 
   console.log(filterString)
 
