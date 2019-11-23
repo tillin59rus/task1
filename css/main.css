@@ -8,20 +8,22 @@
 html {
 	height: 100%;
 }
+
 header, nav, section, article, aside, footer {
 	display: block;
 }
+
 body {
 	height: 100%;
 }
 
 /*================Верх=============================*/
-
 #top {
   width: 100%;
   height: 50px;
   background: #C3B6EE;
 }
+
 #top p {
   font-size: 25px;
   padding-top: 10px;
@@ -30,20 +32,17 @@ body {
 }
 
 /*================Обертка=============================*/
-
 #wrapper {
 	margin: 0 auto;
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-  background-color: #ffffff;/*#E4DEF8*/
+  background-color: #ffffff;
 }
 
 #wrapper .shift {
   margin-left: 254px;
 }
-
-
 
 /*================Контент=============================*/
 .content {
@@ -51,11 +50,11 @@ body {
   margin-left: 30px;
   margin-right: 30px;
   background: #EAE5FC;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
 }
 
 .content .bigHeader {
-  background: #ffffff/*#E4DEF8*/;
+  background: #ffffff;
   padding: 25px 10px 10px 10px;
 }
 .content h4 {
@@ -83,22 +82,8 @@ body {
   padding: 25px 10px 10px 10px;
 }
 
-.content .edit-form table tr td input{
+.content .edit-form table tr td input {
   align-self: center;
-}
-.content li {
-  padding: 25px 10px 10px 10px;
-}
-.content li a {
-  color: #7C68BE ;
-  text-decoration: none;
-}
-.content li a:hover{
-  color: #9E65BD ;
-}
-
-.content .shift {
-  margin-left: 254px;
 }
 
 .content table {
@@ -110,6 +95,11 @@ body {
   border: 1px solid #7C68BE;
   padding: 5px; /* Поля вокруг текста */
  }
+
+.content table button {
+  margin: 5px;
+}
+
  .content .buttonColumn {
    width: 10%;
  }
@@ -120,7 +110,6 @@ body {
 .content table .boldCell {
   font-weight: bold
 }
-
 
 .content .edit-form table {
   border-collapse: collapse; /*убираем пустые промежутки между ячейками*/
@@ -152,7 +141,7 @@ body {
   width: 100%
 }
 .content .filter-field td, th {
-    border: 0px; 
+  border: 0px; 
 }
 
 /*================Низ=============================*/
