@@ -203,7 +203,7 @@ function addInvoiceInTable(invoice, table, isShowColumns) {
         const editButton = document.createElement('button');
         editButton.innerHTML = 'Edit';
         editButton.onclick = function() {
-          location.href = 'edit-form.html?invoice-id=' + invoice.id;
+          location.href = 'html/edit-form.html?invoice-id=' + invoice.id;
         };
         cell.appendChild(editButton);
 

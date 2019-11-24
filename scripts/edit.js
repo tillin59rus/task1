@@ -26,7 +26,7 @@ function save() {
       },
       body: JSON.stringify(newInvoice),
   }).then((result) => {
-    location.href="index.html";
+    location.href="../index.html";
   }, (error) => {
     console.error(error.status);
   });
