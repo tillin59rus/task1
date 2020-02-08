@@ -1,5 +1,3 @@
-var counter = 0;
-
 let addInvoice = async () => {
   const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(
     c
@@ -26,7 +24,7 @@ let addInvoice = async () => {
     body: JSON.stringify(newInvoice)
   });
   if (response.ok) {
-    location.href = 'edit-form.html?invoice-id=' + uuid;
+    location.href = 'html/edit-form.html?invoice-id=' + uuid;
   } else {
     console.error('Error: ${response.status}');
   }

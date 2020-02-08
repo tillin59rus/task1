@@ -25,7 +25,7 @@ function save() {
         'Content-Type': 'application/json;charset=utf-8'
       },
       body: JSON.stringify(newInvoice),
-  }).then((result) => {
+  }).then(() => {
     location.href="../index.html";
   }, (error) => {
     console.error(error.status);
